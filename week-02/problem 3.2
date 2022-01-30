@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jan 30 02:24:58 2022
+
+@author: waleed
+"""
+
+# Standard setup
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create a random number generator
+from numpy.random import default_rng
+rng = default_rng()
+
+# Draw from the Uniform Distribution
+rand = rng.random
+
+# The output of rand() < 0.5 was simply either "True" or "False"
+# It would simulate a coin flip outcome because the odds are 50/50 to get either heads or tails
+# which is the same outcome of the code true/false.
+
+s = rand(6) < 0.5                 # generates a random number less than 0.5 that consistes of 6 decimal places 
+x = np.sum(s / 2**np.arange(1,7)) # the arrange command creates an array [1,2,3,4,5,7] where python raises the number 2 to the power of each number in this array and divide s by that number. Then the sum command adds up all the values. 
+
+print("x= {}".format(x))          # This line prints the overall sum.
+
+a = []                                  # this line is to create an empty list to add values to it later using the for loop
+for i in range(6000):                   # creates a for loop that start counting from 0 and ends at 5,999 to end up with a total of 6000 times
+    s = rand(6) < 0.5                   
+    x = np.sum(s / 2**np.arange(1,7))
+    a.append(x)                         # adds x value to the end of array a to end up with 6,000 elements at the end of the for loop
+
+
+plt.hist(a, rwidth=.9)      # creates a histogram with the values of the array (a)
