@@ -1,0 +1,74 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb  7 17:39:47 2022
+
+@author: walee
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Assignment 1
+
+B = 10000
+A = 170000
+alpha = .5
+beta = 1
+
+time = np.linspace(0,10,1000)
+viral_load = A * np.exp(-alpha*time) + B * np.exp(-beta*time)
+
+plt.plot(time,viral_load)
+data_set = np.loadtxt("HIVseries.csv", delimiter=',')
+x = data_set[:,0]
+f = data_set[:,1]
+X = np.array(x)
+Y = np.array(f)
+plt.plot(X,Y)
+"""
+It looks like these parameters satesfy the data points given except for the first two data points that appear to be an anomalies.
+"""
+
+# Assignment 2
+def w(t,A,tau):
+    return A*(np.e**(-t/tau)-1+t/tau)
+
+t = np.linspace(0,2,1000)
+plt.figure()
+plt.plot(t,w(t,1,1), color = 'green', linestyle = 'dotted')
+plt.plot(t,w(t,2,2), color = 'red', linestyle = 'solid')
+plt.plot(t,w(t,3,3), color = 'blue', linestyle = 'dashed')
+plt.xlabel('time')
+plt.ylabel('W(t)')
+plt.legend(('W1','W2','W3'))
+plt.show()
+
+
+# Assignment 3:
+
+def v(t1,tau):
+    return (1- np.e**(-t1/tau))
+
+t1 = np.linspace(0,7,1000)
+novick_A = np.loadtxt("g149novickA.csv", delimiter=',')
+
+plt.figure()
+x1 = novick_A[:,0]
+f1 = novick_A[:,1]
+X1 = np.array(x1)
+Y1 = np.array(f1)
+plt.scatter(X1,Y1, marker = '+')
+plt.plot(t1,v(t1,3))
+plt.show()
+
+novick_B = np.loadtxt("g149novickB.csv", delimiter=',')
+
+plt.figure()
+x2 = novick_B[:,0]
+f2 = novick_B[:,1]
+X2 = np.array(x2)
+Y2 = np.array(f2)
+plt.scatter(X1,Y1, marker = '+')
+plt.plot(t1,v(t,1))
+plt.show()
+
